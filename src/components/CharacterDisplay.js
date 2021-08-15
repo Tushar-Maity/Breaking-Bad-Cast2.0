@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import CharacterCard from './CharacterCard';
 import Pagination from './Pagination';
+import SyncLoader from "react-spinners/SyncLoader";
 
-const CharacterDisplay = ({ dataContent }) => {
+const CharacterDisplay = ({ dataContent, loading }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [articlesPerPage] = useState(10);
@@ -18,24 +19,31 @@ const CharacterDisplay = ({ dataContent }) => {
     }
     return (
         <CharacterDisplayContainer>
-            <h2>Showing Results of Page {currentPage}</h2>
-            <CardsContainer>
-                {currentArticles?.map(content => (
-                    <CharacterCard 
-                        id={content.char_id} 
-                        image={content.img} 
-                        name={content.name} 
-                        nickname={content.nickname} 
+            {loading ? <SyncLoader 
+                size="30" 
+                color="green"
+            /> : 
+                <React.Fragment>
+                    <HeaderTag>Showing Results of Page {currentPage}</HeaderTag>
+                    <CardsContainer>
+                        {currentArticles?.map(content => (
+                            <CharacterCard 
+                                id={content.char_id} 
+                                image={content.img} 
+                                name={content.name} 
+                                nickname={content.nickname} 
+                            />
+                        ))}
+                    </CardsContainer>
+                    <Pagination 
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        articlesPerPage={articlesPerPage}
+                        totalArticles={dataContent.length}
+                        paginate={paginate}
                     />
-                ))}
-            </CardsContainer>
-            <Pagination 
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                articlesPerPage={articlesPerPage}
-                totalArticles={dataContent.length}
-                paginate={paginate}
-            />
+                </React.Fragment>
+            }
         </CharacterDisplayContainer>
     )
 }
@@ -46,10 +54,15 @@ const CharacterDisplayContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+`;
 
-    h2 {
-        margin-bottom: 40px;
-    }
+const HeaderTag = styled.h1`
+    font-size: 40px;
+    margin-bottom: 40px;
+    background-image: linear-gradient(to bottom right, #093009, #29773e, #369457);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 `;
 
 const CardsContainer = styled.div`

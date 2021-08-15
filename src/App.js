@@ -5,6 +5,8 @@ import Header from './components/Header';
 
 const App = () => {
 
+  const [loading, setLoading] = useState(true);
+
   const [content, setContent] = useState([]);
 
   useEffect(() => {
@@ -14,6 +16,7 @@ const App = () => {
     })
     .then((dataItem) => {
       setContent(dataItem)
+      setLoading(false)
     })
     .catch((error) => {
       console.log(error)
@@ -23,7 +26,7 @@ const App = () => {
   return (
     <AppContainer>
       <Header />
-      <CharacterDisplay dataContent={content}/>
+      <CharacterDisplay dataContent={content} loading={loading}/>
     </AppContainer>
   );
 }
