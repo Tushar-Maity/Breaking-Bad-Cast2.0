@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CharacterCard from './CharacterCard';
 import Pagination from './Pagination';
 import SyncLoader from "react-spinners/SyncLoader";
+import {Link} from 'react-router-dom'
 
 const CharacterDisplay = ({ dataContent, loading }) => {
 
@@ -19,20 +20,23 @@ const CharacterDisplay = ({ dataContent, loading }) => {
     }
     return (
         <CharacterDisplayContainer>
-            {loading ? <SyncLoader 
-                size="30" 
-                color="green"
-            /> : 
+            {loading ? <Loader>
+                <SyncLoader 
+                    size="30px" 
+                    color="green"
+                />
+            </Loader> : 
                 <React.Fragment>
                     <HeaderTag>Showing Results of Page {currentPage}</HeaderTag>
                     <CardsContainer>
                         {currentArticles?.map(content => (
-                            <CharacterCard 
-                                id={content.char_id} 
-                                image={content.img} 
-                                name={content.name} 
-                                nickname={content.nickname} 
-                            />
+                            <Link to={`/characters/${content.char_id}`} key={content.char_id} style={{textDecoration: "none", color: "inherit"}}>
+                                <CharacterCard 
+                                    image={content.img} 
+                                    name={content.name} 
+                                    nickname={content.nickname} 
+                                />
+                            </Link>
                         ))}
                     </CardsContainer>
                     <Pagination 
@@ -54,6 +58,13 @@ const CharacterDisplayContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+`;
+
+const Loader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 300px);
 `;
 
 const HeaderTag = styled.h1`

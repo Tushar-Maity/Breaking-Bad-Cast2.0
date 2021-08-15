@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
+import CharacterDetail from './components/CharacterDetail';
 import CharacterDisplay from './components/CharacterDisplay';
 import Header from './components/Header';
 
@@ -9,24 +11,34 @@ const App = () => {
 
   const [content, setContent] = useState([]);
 
-  useEffect(() => {
-    const data = fetch('https://www.breakingbadapi.com/api/characters');
-    data.then((datas) => {
-      return (datas.json())
-    })
-    .then((dataItem) => {
-      setContent(dataItem)
-      setLoading(false)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }, [])
+  const [text, setText] = useState('');
+
+    useEffect(() => {
+        const results = fetch(`https://www.breakingbadapi.com/api/characters?name=${text}`)
+        results.then((response) => {
+            return response.json();
+        }).then((result) => {
+            setContent(result)
+            setLoading(false);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }, [text])
 
   return (
     <AppContainer>
-      <Header />
-      <CharacterDisplay dataContent={content} loading={loading}/>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Header text={text} setText={setText}/>
+            <CharacterDisplay dataContent={content} loading={loading}/>
+          </Route>
+          <Route exact path="/characters/:id">
+            <CharacterDetail/>
+          </Route>
+        </Switch>
+      </Router>
     </AppContainer>
   );
 }
