@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import CharacterDisplay from './components/CharacterDisplay';
 import Header from './components/Header';
 
 const App = () => {
 
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState([]);
 
   useEffect(() => {
     const data = fetch('https://www.breakingbadapi.com/api/characters');
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <AppContainer>
       <Header />
+      <CharacterDisplay dataContent={content}/>
     </AppContainer>
   );
 }
