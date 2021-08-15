@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CharacterCard = ({ id, image, name, nickname }) => {
+const CharacterCard = ({ image, name, nickname }) => {
     return (
-        <CharacterCardContainer key={id}>
+        <CharacterCardContainer>
             <img src={image} alt="character_photo"/>
             <h1>{name}</h1>
             <h2>{nickname}</h2>

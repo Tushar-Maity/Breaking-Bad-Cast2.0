@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import Logo from '../images/logo.png'
 import { MdSearch } from 'react-icons/md'
 
-const Header = () => {
+const Header = ({ text, setText }) => {
+    
     return (
         <HeaderContainer>
             <HeaderLeft>
@@ -14,7 +15,14 @@ const Header = () => {
                 </HeaderLeftContent>
             </HeaderLeft>
             <HeaderSearch>
-                <input placeholder="Search Character"/>
+                <input 
+                    placeholder="Search Characters" 
+                    type="text" 
+                    value={text}
+                    onChange={(e) => {
+                        setText(e.target.value)
+                    }}
+                />
                 <MdSearch />
             </HeaderSearch>
         </HeaderContainer>
