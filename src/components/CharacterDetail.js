@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import QoutesComponent from './QoutesComponent'
+import styled from 'styled-components'
 
 const CharacterDetail = () => {
 
@@ -14,20 +15,23 @@ const CharacterDetail = () => {
             return response.json();
         }).then((result) => {
             setDetailData(result[0])
+            console.log(result[0])
         })
         .catch((error) => {
             console.log(error);
         })
     }, [id])
-
-
+    
     // console.log('detailData',detailData)
     return (
-        <div>
-            <h1>{id}</h1>
+        <CharacterDetailContainers>
+            {/* <img src={image} alt="image_hehe"/> */}
             <QoutesComponent name={detailData?.name}/>
-        </div>
+        </CharacterDetailContainers>
     )
 }
+
+const CharacterDetailContainers = styled.div`
+`;
 
 export default CharacterDetail

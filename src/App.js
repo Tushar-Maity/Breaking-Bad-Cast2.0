@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import CharacterDetail from './components/CharacterDetail';
 import CharacterDisplay from './components/CharacterDisplay';
 import Header from './components/Header';
+import Landing from './components/Landing';
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
   const [text, setText] = useState('');
 
     useEffect(() => {
+      setTimeout(() => {
         const results = fetch(`https://www.breakingbadapi.com/api/characters?name=${text}`)
         results.then((response) => {
             return response.json();
@@ -24,6 +26,7 @@ const App = () => {
         .catch((error) => {
             console.log(error);
         })
+      }, 2000)
     }, [text])
 
   return (
@@ -31,10 +34,13 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route exact path="/data">
             <Header text={text} setText={setText}/>
             <CharacterDisplay dataContent={content} loading={loading}/>
           </Route>
-          <Route exact path="/characters/:id">
+          <Route exact path="/data/characters/:id">
             <CharacterDetail/>
           </Route>
         </Switch>

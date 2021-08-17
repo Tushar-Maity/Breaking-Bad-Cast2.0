@@ -12,13 +12,14 @@ const QoutesComponent = (
             return response.json();
         }).then((result) => {
             setQoutes(result)
+            // console.log(result)
         })
         .catch((error) => {
             console.log(error);
         })
     }, [name])
 
-    console.log('qoutes', qoutes)
+    // console.log('qoutes', qoutes)
     return (
         <div>
             

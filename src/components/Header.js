@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Logo from '../images/logo.png'
 import { MdSearch } from 'react-icons/md'
+import {Link} from 'react-router-dom'
 
 const Header = ({ text, setText }) => {
     
@@ -25,6 +26,11 @@ const Header = ({ text, setText }) => {
                 />
                 <MdSearch />
             </HeaderSearch>
+            <Link to='/' style={{textDecoration: "none"}}>
+                <Logout>    
+                    Get Back
+                </Logout>
+            </Link>
         </HeaderContainer>
     )
 }
@@ -66,6 +72,7 @@ const HeaderSearch = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 380px;
 
     input {
         border: none;
@@ -73,6 +80,24 @@ const HeaderSearch = styled.div`
         height: 35px;
         width: 280px;
         background-color: whitesmoke;
+    }
+`;
+
+const Logout = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    height: 46px;
+    width: 120px;
+    background-color: #29773e;
+    color: #fff;
+    font-size: 18px;
+    transition: all .2s;
+
+    &:hover {
+        background-color: whitesmoke;
+        color: #29773e;
     }
 `;
 
