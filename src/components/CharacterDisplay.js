@@ -15,6 +15,7 @@ const CharacterDisplay = ({ dataContent, loading }) => {
     
     const currentArticles = dataContent.slice(indexOfFirstArticle, indexOfLastArticle)
 
+    // console.log(currentArticles);
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
@@ -33,8 +34,10 @@ const CharacterDisplay = ({ dataContent, loading }) => {
                             <Link to={`/characters/${content.char_id}`} key={content.char_id} style={{textDecoration: "none", color: "inherit"}}>
                                 <CharacterCard 
                                     image={content.img} 
-                                    name={content.name} 
-                                    nickname={content.nickname} 
+                                    name={content.name}
+                                    status={content.status}
+                                    dob={content.birthday}
+                                    occupation={content.occupation}
                                 />
                             </Link>
                         ))}

@@ -36,7 +36,7 @@ const Pagination = ({
         <PaginateContainer>
             <ul>
                 {currentPage > 1 &&
-                    <li onClick={handlePrevButton}>
+                    <li onClick={handlePrevButton} style={{backgroundColor: "#29773e", color: "#fff"}}>
                         <AiOutlineLeft />
                     </li>
                 }
@@ -52,7 +52,7 @@ const Pagination = ({
                     )
                 })}
                 {currentPage < totalPages && 
-                    <li onClick={handleNextButton}>
+                    <li onClick={handleNextButton} style={{backgroundColor: "#29773e", color: "#fff"}}>
                         <AiOutlineRight />
                     </li>
                 }
