@@ -21,6 +21,8 @@ const App = () => {
         }).then((result) => {
             setContent(result)
             setLoading(false);
+            console.log(content);
+            console.log(result);
         })
         .catch((error) => {
             console.log(error);
